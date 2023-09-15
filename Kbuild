@@ -19,6 +19,10 @@ ifeq ($(CONFIG_ARCH_BLAIR),y)
 dtbo-y += blair-cnss.dtbo
 endif
 
+ifeq ($(CONFIG_ARCH_HOLI),y)
+dtbo-y += holi-cnss.dtbo
+endif
+
 ifeq ($(CONFIG_ARCH_CROW),y)
 dtbo-y += crow-cnss.dtbo
 endif
