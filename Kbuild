@@ -55,7 +55,9 @@ dtbo-y += monaco-standalone-cnss.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_LEMANS),y)
+ifneq ($(CONFIG_ARCH_QTI_VM),y)
 dtbo-y += lemans-cnss.dtbo
+endif
 endif
 
 ifeq ($(CONFIG_QTI_QUIN_GVM),y)
