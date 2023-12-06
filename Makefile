@@ -1,9 +1,8 @@
-KBUILD_OPTIONS += KBUILD_EXTMOD_DTS=.
-
-all: dtbs
+%:
+	echo "Processing target $@"
+	${CC} -undef -x assembler-with-cpp $@.dtso -I ${KERNEL_INCLUDE} -E -o $@.dts.preprocessed
+	${DTC} -O dtb -o $@.dtbo $@.dts.preprocessed
 
 clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) clean
-
-%:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) $@ $(KBUILD_OPTIONS)
+	rm -rf *.dtbo
+	rm -rf *.preprocessed
