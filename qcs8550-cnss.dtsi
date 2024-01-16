@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
@@ -62,13 +62,6 @@
 };
 
 &soc {
-	qmp_aop: qcom,qmp-aop {
-		compatible = "qcom,qmp-mbox";
-		qcom,qmp = <&aoss_qmp>;
-		label = "aop";
-		#mbox-cells = <1>;
-	};
-
 	wlan: qcom,cnss-qca-converged {
 		compatible = "qcom,cnss-qca-converged";
 		reg = <0xb0000000 0x10000>;
@@ -104,7 +97,7 @@
 			vdd-wlan-rfa2-supply = <&vreg_s4g_1p25>;
 			qcom,vdd-wlan-rfa2-config = <1350000 1354000 0 0 1>;
 
-			mboxes = <&qmp_aop 0>;
+			qcom,qmp = <&aoss_qmp>;
 			interconnects =
 				<&pcie_noc MASTER_PCIE_0 0
 				 &pcie_noc SLAVE_ANOC_PCIE_GEM_NOC 0>,
