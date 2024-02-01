@@ -214,30 +214,3 @@
 		};
 	};
 };
-
-&pcie1 {
-	pcie1_rp: pcie1_rp {
-		#address-cells = <5>;
-		#size-cells = <0>;
-
-		cnss_pci1: cnss_pci1 {
-			reg = <0 0 0 0 0>;
-			qcom,iommu-group = <&cnss_pci_iommu_group1>;
-			memory-region = <&cnss_wlan_mem>;
-
-			#address-cells = <1>;
-			#size-cells = <1>;
-
-			cnss_pci_iommu_group1: cnss_pci_iommu_group1 {
-				qcom,iommu-msi-size = <0x1000>;
-				qcom,iommu-dma-addr-pool =
-					<0xa0000000 0x10000000>;
-				qcom,iommu-dma = "fastmap";
-				qcom,iommu-pagetable = "coherent";
-				qcom,iommu-faults =
-					"stall-disable", "HUPCF",
-					"no-CFRE", "non-fatal";
-			};
-		};
-	};
-};
