@@ -92,6 +92,7 @@ endif
 
 ifeq ($(CONFIG_ARCH_YUPIK),y)
 dtbo-y += lahaina-qca6490-cnss.dtbo
+dtbo-y += lahaina-qca6750-cnss.dtbo
 endif
 
 always-y	:= $(dtb-y) $(dtbo-y)
