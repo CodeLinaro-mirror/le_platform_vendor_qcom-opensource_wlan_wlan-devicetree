@@ -87,6 +87,14 @@
 			pcie-disable-l1ss;
 		};
 	};
+	cnss_sdio: qcom,cnss-sdio {
+		compatible = "qcom,cnss_sdio";
+		qcom,wlan-ramdump-dynamic = <0x200000>;
+		subsys-name = "AR6320";
+		vdd-wlan-supply = <&vreg_conn_pa>;
+		vdd-wlan-io-supply = <&L6A>;
+		vdd-wlan-xtal-supply = <&L6A>;
+	};
 };
 
 &pcie0 {
