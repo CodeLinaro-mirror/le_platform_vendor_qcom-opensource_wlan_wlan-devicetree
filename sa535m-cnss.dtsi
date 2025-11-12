@@ -30,28 +30,24 @@
 };
 
 &reserved_memory {
-	#address-cells = <2>;
-	#size-cells = <2>;
-	ranges;
-
 	cnss_wlan_mem: cnss_wlan_region {
 		compatible = "shared-dma-pool";
-		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		alloc-ranges = <0x0 0x00000000 0x0 0xFFFFFFFF>;
 		reusable;
 		alignment = <0x0 0x400000>;
-		size = <0x0 0x1400000>;
+		size = <0x0 0x2000000>;
 	};
 };
 
 &soc {
-	wlan: qcom,cnss-qca-converged {
+	wlan_sa535m: qcom,cnss-qca-converged {
 		compatible = "qcom,cnss-qca-converged";
 		qcom,wlan;
 		qcom,multi-wlan-exchg;
 		qcom,wlan-rc-num = <2>;
 		qcom,bus-type=<0>;
 		qcom,notify-modem-status;
-		reg = <0xb0000000 0x10000>;
+		reg = <0x0 0xb0000000 0x0 0x10000>;
 		reg-names = "smmu_iova_ipa";
 
 		vdd-wlan-ctrl1-supply = <&vreg_conn_pa>;
@@ -95,24 +91,21 @@
 	};
 };
 
-&pcie2_rp {
-	#address-cells = <5>;
-	#size-cells = <0>;
-	cnss_pci: cnss_pci {
+&pcie2_port0 {
+	cnss_pci0: cnss_pci0 {
 		reg = <0 0 0 0 0>;
-		qcom,iommu-group = <&cnss_pci_iommu_group>;
-		memory-region = <&cnss_wlan_mem>;
+		qcom,iommu-group = <&cnss_pci_iommu_group0>;
+		memory-region = <&cnss_wlan_mem &cnss_pci0_iommu_region_partition>;
 
-		#address-cells = <1>;
-		#size-cells = <1>;
+		cnss_pci0_iommu_region_partition: cnss_pci0_iommu_region_partition {
+			iommu-addresses = <&cnss_pci0 0x0 0x0 0x0 0x0 0xA0000000>,
+					  <&cnss_pci0 0x0 0x0 0xB0000000 0x0 0xFFFFFFFF>;
+		};
 
-		cnss_pci_iommu_group: cnss_pci_iommu_group {
-			qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
-			qcom,iommu-geometry = <0xa0000000 0x10010000>;
+		/* Used by cnss2 only for compatibility */
+		cnss_pci_iommu_group0: cnss_pci_iommu_group0 {
 			qcom,iommu-dma = "fastmap";
-			qcom,iommu-pagetable = "coherent";
-			qcom,iommu-faults = "stall-disable", "no-CFRE", "HUPCF",
-					    "non-fatal";
+			qcom,iommu-dma-addr-pool = <0xA0000000 0x10000000>;
 		};
 	};
 };
@@ -123,5 +116,8 @@
 	qcom,no-l1ss-supported;
 	qcom,boot-option = <0x1>;
 	status = "ok";
+
+	/* Ensure that PCIe RC driver probe is deferred until CNSS is probed */
+	dummy-supply = <&wlan_sa535m>;
 };
 
