@@ -6,8 +6,3 @@
        memory-region = <&wlan_fw_mem>, <&wlan_ce_mem>;
        status = "okay";
 };
-
-&remoteproc_wpss {
-       firmware-name = "ath11k/WCN6750/hw1.0/wpss.mdt";
-       status = "okay";
-};
