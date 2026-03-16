@@ -13,6 +13,7 @@
 		qcom,bus-type=<0>;
 		qcom,notify-modem-status;
 		firmware-managed-resources;
+		gunyah-hypervisor;
 		qcom,pld_bus_ops_name = "pld_pcie_qca6490_cnss2";
 
 		#address-cells=<1>;
