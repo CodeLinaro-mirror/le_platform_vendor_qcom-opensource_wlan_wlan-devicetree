@@ -19,7 +19,22 @@
 		#size-cells=<1>;
 		ranges = <0xb0000000 0xb0000000 0x10000>;
 
-		power-domains = <&scmi_power 6>, <&scmi_power 7>;
+		/*
+		 * WLAN and BT power supplies are controlled by PMIC GPIOs,
+		 * not through the standard Linux regulator framework.
+		 *
+		 * Although WLAN and BT share the same physical regulator,
+		 * they were previously assigned to separate SCMI power
+		 * domains. Since GearVM does not provide a voting mechanism
+		 * for PMIC GPIO operations, disabling BT could de-assert
+		 * the PMIC GPIO and unintentionally remove power from WLAN,
+		 * resulting in a PCIe link down.
+		 *
+		 * Assign WLAN and BT to the same regulator power domain
+		 * (<&scmi_power 8>) so that the genpd framework can provide
+		 * proper power voting from the kernel layer.
+		 */
+		power-domains = <&scmi_power 8>, <&scmi_power 7>;
 		power-domain-names = "wlan_ldo", "wlan_gpio";
 
 		chip_cfg@0 {
