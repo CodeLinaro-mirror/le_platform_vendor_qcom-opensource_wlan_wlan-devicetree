@@ -28,6 +28,8 @@
 		reg = <0xb0000000 0x10000>;
 		reg-names = "smmu_iova_ipa";
 
+		msix-match-addr = <0x3000>;
+
 		vdd-wlan-ctrl1-supply = <&vreg_conn_pa>;
 		vdd-wlan-io-supply = <&pmx75_l6>;
 		vdd-wlan-rfa1-supply = <&pmx75_s7>;
@@ -61,6 +63,14 @@
 
 		chip_cfg@2 {
 			supported-ids = <0x1107>;
+			qcom,no-bwscale;
+			qcom,wlan-ramdump-dynamic = <0x600000>;
+			qcom,smmu-s1-enable;
+			pcie-disable-l1ss;
+		};
+
+		chip_cfg@3 {
+			supported-ids = <0x1112>;
 			qcom,no-bwscale;
 			qcom,wlan-ramdump-dynamic = <0x600000>;
 			qcom,smmu-s1-enable;
