@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "sa8787p-sdp8-vm-cnss.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, SECA Single LA  Guest Virtual Machine";
+	compatible = "qcom,seca", "qcom,quinvm";
+	qcom,msm-id = <742 0x10000>, <742 0x10001>;
+	qcom,board-id = <0x0 0x1000001>;
+};
