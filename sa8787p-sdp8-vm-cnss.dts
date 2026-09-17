@@ -11,8 +11,9 @@
 #include "sa8787p-sdp8-vm-dual-cnss.dtsi"
 
 / {
-	model = "Qualcomm Technologies, SECA Single LA  Guest Virtual Machine";
+	model = "Qualcomm Technologies, SECA Guest Virtual Machine";
 	compatible = "qcom,seca", "qcom,quinvm";
 	qcom,msm-id = <742 0x10000>, <742 0x10001>;
-	qcom,board-id = <0x0 0x1000001>;
+	qcom,board-id = <0x0 0x1000001>, <0x0 0x2000001>, <0x0 0x2000002>,
+			<0x0 0x3000001>, <0x0 0x4000002>;
 };
