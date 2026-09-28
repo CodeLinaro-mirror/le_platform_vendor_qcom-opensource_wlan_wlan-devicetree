@@ -38,6 +38,7 @@
 		power-domain-names = "wlan_ldo", "wlan_gpio";
 
 		wlan-txrx-intr-cpumask = <0xf0 0xf0>;
+		qcom,napi-ipi-redirect-enable;
 
 		chip_cfg@0 {
 			supported-ids = <0x1101>;
