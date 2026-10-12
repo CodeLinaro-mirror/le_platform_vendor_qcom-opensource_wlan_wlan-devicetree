@@ -8,6 +8,7 @@
 /plugin/;
 
 #include "sa8787p-gunyah-vm-cnss.dtsi"
+#include "sa8787p-gunyah-vm-dual-cnss.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. SECA QAM Gunyah VM";
